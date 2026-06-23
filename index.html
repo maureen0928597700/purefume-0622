@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PUREFUME 香氛網站</title>
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+  <style>
+    :root {
+      --purple: #9f74e8;
+      --purple-dark: #7f55d7;
+      --black: #050505;
+      --red: #ff3a22;
+      --paper: #ffffff;
+      --soft: #f5f1ff;
+      --text: #242124;
+    }
+
+    * {
+      letter-spacing: 0;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--paper);
+      font-family: "Arial Black", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+    }
+
+    p,
+    .card-text,
+    .info-text,
+    .small-text {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      font-weight: 600;
+    }
+
+    .site-nav {
+      min-height: 116px;
+      background: var(--purple);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+    }
+
+    .navbar-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--black);
+      font-size: clamp(1.75rem, 3vw, 2.65rem);
+      font-weight: 900;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 58px;
+      height: 72px;
+      transform: rotate(25deg);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--black);
+    }
+
+    .brand-mark::before {
+      width: 42px;
+      height: 62px;
+      right: 6px;
+      top: 2px;
+      border-radius: 36px 8px 36px 10px;
+    }
+
+    .brand-mark::after {
+      width: 46px;
+      height: 20px;
+      left: 0;
+      bottom: 8px;
+      border-radius: 20px 4px 20px 4px;
+      transform: rotate(-28deg);
+    }
+
+    .navbar-toggler {
+      border: 2px solid var(--black);
+    }
+
+    .fw-black {
+      font-weight: 900;
+    }
+
+    .navbar-nav {
+      gap: clamp(22px, 5vw, 72px);
+    }
+
+    .nav-link {
+      color: var(--black);
+      font-size: .95rem;
+      font-weight: 900;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus,
+    .nav-link.active {
+      color: #d45f22;
+    }
+
+    .hero-carousel {
+      background: var(--paper);
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .hero-slide {
+      position: relative;
+      min-height: 452px;
+      overflow: hidden;
+    }
+
+    .hero-landscape {
+      position: absolute;
+      top: 8px;
+      left: 7.8%;
+      width: min(31vw, 372px);
+      height: 248px;
+      object-fit: cover;
+      border-radius: 36px;
+    }
+
+    .hero-product {
+      position: absolute;
+      right: 7.2%;
+      bottom: -70px;
+      width: min(22vw, 272px);
+      height: 360px;
+      object-fit: cover;
+      border-radius: 64px;
+      z-index: 2;
+    }
+
+    .hero-copy {
+      position: absolute;
+      top: 137px;
+      left: 42.4%;
+      right: 30%;
+      z-index: 3;
+    }
+
+    .hero-copy h1,
+    .hero-copy h2 {
+      margin: 0;
+      color: var(--red);
+      font-size: clamp(1rem, 1.45vw, 1.28rem);
+      font-weight: 900;
+      line-height: 1.8;
+      white-space: nowrap;
+    }
+
+    .carousel-indicators {
+      bottom: 14px;
+    }
+
+    .carousel-indicators [data-bs-target] {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--purple);
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 6%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(1);
+    }
+
+    .section-padding {
+      padding: 84px 0;
+    }
+
+    .section-title {
+      margin-bottom: 20px;
+      color: var(--black);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      font-weight: 900;
+    }
+
+    .section-kicker {
+      margin-bottom: 8px;
+      color: var(--purple-dark);
+      font-weight: 900;
+    }
+
+    .about-section {
+      background: var(--soft);
+    }
+
+    .about-img {
+      width: 100%;
+      min-height: 380px;
+      object-fit: cover;
+      border-radius: 36px;
+      box-shadow: 0 18px 44px rgba(77, 51, 133, .18);
+    }
+
+    .about-copy {
+      max-width: 540px;
+    }
+
+    .product-card {
+      height: 100%;
+      border: 0;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .1);
+    }
+
+    .product-card img {
+      height: 245px;
+      object-fit: cover;
+    }
+
+    .product-card .card-body {
+      padding: 24px;
+    }
+
+    .product-card .card-title {
+      color: var(--black);
+      font-weight: 900;
+    }
+
+    .btn-purple {
+      color: var(--black);
+      background: var(--purple);
+      border: 0;
+      border-radius: 999px;
+      font-weight: 900;
+      padding: 10px 24px;
+    }
+
+    .btn-purple:hover,
+    .btn-purple:focus {
+      background: var(--purple-dark);
+      color: #fff;
+    }
+
+    .group-links {
+      background: var(--purple);
+    }
+
+    .link-card {
+      display: block;
+      height: 100%;
+      padding: 30px;
+      color: var(--black);
+      text-decoration: none;
+      background: rgba(255, 255, 255, .92);
+      border-radius: 24px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .link-card:hover,
+    .link-card:focus {
+      color: var(--black);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, .16);
+    }
+
+    .footer-main {
+      background: var(--black);
+      color: #fff;
+    }
+
+    .info-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-right: 12px;
+      color: var(--black);
+      background: var(--purple);
+      border-radius: 12px;
+      font-weight: 900;
+    }
+
+    .footer-main a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer-main a:hover,
+    .footer-main a:focus {
+      color: var(--purple);
+    }
+
+    .footer-title {
+      color: var(--purple);
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .footer-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer-list li + li {
+      margin-top: 10px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      font-weight: 700;
+    }
+
+    .social-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: var(--black);
+      background: var(--purple);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .site-footer {
+      color: var(--black);
+      background: var(--purple);
+      font-weight: 900;
+    }
+
+    @media (max-width: 991.98px) {
+      .site-nav {
+        min-height: auto;
+        padding: 18px 0;
+      }
+
+      .navbar-nav {
+        gap: 4px;
+        padding-top: 18px;
+      }
+
+      .hero-slide {
+        min-height: 660px;
+        padding: 34px 24px;
+      }
+
+      .hero-landscape,
+      .hero-product,
+      .hero-copy {
+        position: static;
+        width: 100%;
+      }
+
+      .hero-landscape {
+        height: 250px;
+        margin-bottom: 28px;
+      }
+
+      .hero-product {
+        display: block;
+        width: min(76vw, 320px);
+        height: 300px;
+        margin: 30px auto 0;
+        border-radius: 44px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy h1,
+      .hero-copy h2 {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar-brand {
+        gap: 10px;
+        font-size: 1.55rem;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 54px;
+      }
+
+      .hero-slide {
+        min-height: 620px;
+      }
+
+      .section-padding {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg site-nav">
+    <div class="container">
+      <a class="navbar-brand" href="#home" aria-label="PUREFUME 首頁">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>PUREFUME</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="開啟選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">首頁</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">品牌故事</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="home" class="hero-carousel">
+    <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3600">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="第 1 張"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="第 2 張"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="第 3 張"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3" aria-label="第 4 張"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4" aria-label="第 5 張"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="hero-slide">
+            <img class="hero-landscape" src="https://images.unsplash.com/photo-1477511801984-4ad318ed9846?auto=format&fit=crop&w=900&q=85" alt="薰衣草田園">
+            <div class="hero-copy">
+              <h1>純天然植物萃取的芳香 身心靈的洗禮</h1>
+            </div>
+            <img class="hero-product" src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=700&q=85" alt="植物香氛瓶">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide">
+            <img class="hero-landscape" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=85" alt="綠色植物花園">
+            <div class="hero-copy">
+              <h2>植萃香氣調和日常 讓空間自然沉靜</h2>
+            </div>
+            <img class="hero-product" src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=700&q=85" alt="香水瓶">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide">
+            <img class="hero-landscape" src="https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=900&q=85" alt="花束與自然光">
+            <div class="hero-copy">
+              <h2>一滴香氛喚醒記憶 一室清新溫柔</h2>
+            </div>
+            <img class="hero-product" src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=700&q=85" alt="香氛蠟燭">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide">
+            <img class="hero-landscape" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85" alt="粉色花朵">
+            <div class="hero-copy">
+              <h2>花草木質交織細節 留住舒服的呼吸</h2>
+            </div>
+            <img class="hero-product" src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=85" alt="精油保養瓶">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide">
+            <img class="hero-landscape" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85" alt="山丘晨光">
+            <div class="hero-copy">
+              <h2>從自然取得靈感 為生活留下香氣</h2>
+            </div>
+            <img class="hero-product" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85" alt="香氛與保養品">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev" aria-label="上一張">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next" aria-label="下一張">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section-padding about-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <img class="about-img" src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1100&q=85" alt="香氛瓶與植物">
+          </div>
+          <div class="col-lg-6">
+            <div class="about-copy">
+              <p class="section-kicker">ABOUT PUREFUME</p>
+              <h2 class="section-title">關於我們</h2>
+              <p class="fs-5">PUREFUME 以天然植物萃取為核心，調和花草、木質與果香，打造適合每日使用的香氛產品。</p>
+              <p class="text-secondary">我們重視香氣的層次、產品的安心感與空間裡的舒適氛圍。無論是居家、辦公或旅宿場域，都能用柔和香氣留下清楚而溫暖的品牌記憶。</p>
+              <a class="btn btn-purple mt-3" href="#products">看產品介紹</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <p class="section-kicker">PRODUCTS</p>
+          <h2 class="section-title">產品介紹</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="card product-card">
+              <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=700&q=85" class="card-img-top" alt="草本精油">
+              <div class="card-body">
+                <h3 class="card-title h5">草本精油</h3>
+                <p class="card-text text-secondary">清爽草本與柑橘氣息，適合晨間提振精神。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card product-card">
+              <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=700&q=85" class="card-img-top" alt="居家擴香">
+              <div class="card-body">
+                <h3 class="card-title h5">居家擴香</h3>
+                <p class="card-text text-secondary">穩定釋放香氣，讓客廳與玄關保持舒適印象。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card product-card">
+              <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=700&q=85" class="card-img-top" alt="花香香水">
+              <div class="card-body">
+                <h3 class="card-title h5">花香香水</h3>
+                <p class="card-text text-secondary">柔和花香搭配木質尾韻，溫柔但有辨識度。</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card product-card">
+              <img src="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=700&q=85" class="card-img-top" alt="香氛蠟燭">
+              <div class="card-body">
+                <h3 class="card-title h5">香氛蠟燭</h3>
+                <p class="card-text text-secondary">晚間放鬆與儀式感首選，點亮一段安靜時間。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="links" class="section-padding group-links">
+      <div class="container">
+        <div class="row align-items-end mb-4">
+          <div class="col-lg-7">
+            <p class="section-kicker text-dark">LINKS</p>
+            <h2 class="section-title mb-lg-0">葉偉資訊寒舍群連結</h2>
+          </div>
+          <div class="col-lg-5">
+            <p class="mb-0">快速前往相關網站、社群與合作資訊。</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <a class="link-card" href="#">
+              <h3 class="h4 fw-black">葉偉資訊</h3>
+              <p class="mb-0 text-secondary">網站設計、資訊服務與數位解決方案。</p>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a class="link-card" href="#">
+              <h3 class="h4 fw-black">寒舍群</h3>
+              <p class="mb-0 text-secondary">飯店旅宿、餐飲活動與會員服務。</p>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a class="link-card" href="#">
+              <h3 class="h4 fw-black">品牌社群</h3>
+              <p class="mb-0 text-secondary">新品資訊、香氣靈感與活動消息。</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="footer-main section-padding">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <h2 class="footer-title">社群連結</h2>
+            <ul class="footer-list">
+              <li>
+                <a class="social-link" href="#" aria-label="Facebook">
+                  <span class="social-icon">f</span>
+                  <span>Facebook 粉絲專頁</span>
+                </a>
+              </li>
+              <li>
+                <a class="social-link" href="#" aria-label="Instagram">
+                  <span class="social-icon">IG</span>
+                  <span>Instagram 香氛日誌</span>
+                </a>
+              </li>
+              <li>
+                <a class="social-link" href="#" aria-label="LINE">
+                  <span class="social-icon">L</span>
+                  <span>LINE 官方帳號</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h2 class="footer-title">公司資訊</h2>
+            <p class="info-text">PUREFUME 提供香氛選品、企業禮贈、空間香氛規劃與品牌合作服務。</p>
+            <ul class="footer-list info-text">
+              <li><span class="info-icon">⌂</span>新北市蘆民大道一段100號</li>
+              <li><span class="info-icon">●</span>週一至週五 09:00-18:00</li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h2 class="footer-title">聯絡我們</h2>
+            <ul class="footer-list info-text">
+              <li><span class="info-icon">☎</span><a href="tel:0800223223">0800223223</a></li>
+              <li><span class="info-icon">✉</span><a href="mailto:service@purefume.com">service@purefume.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer py-4">
+      <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 small-text">
+        <span>Copyright &copy; 2026 PUREFUME. All Rights Reserved.</span>
+        <span>版權所有，禁止未經授權轉載使用。</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
